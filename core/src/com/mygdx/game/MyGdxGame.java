@@ -3,6 +3,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -38,6 +39,8 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 	private Texture text, text2;
 	public void create () {
 		font = new BitmapFont();
+		font.setColor(new Color(Color.GOLD));
+		font.getData().setScale(1.5f,1.5f);
 		screenWid=Gdx.graphics.getWidth();
 		screenLen=Gdx.graphics.getHeight();
 		inter = new Interface();
@@ -63,35 +66,58 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 			batch.enableBlending();
 			batch.begin();
 			inter.update();
-			updateCam();
 
-			batch.draw(text, 0, 0);//background
-			batch.draw(text2, inter.selectionX, inter.selectionY);
-			renderUnits();
+
+
+
 			switch(inter.getState()){
+				case 0:
+					renderMenu();
+					break;
+				case 1:
+					batch.draw(text, 0, 0);//background
+					renderUnits();
+					batch.draw(text2, inter.selectionX, inter.selectionY);
+					break;
 				case 2:
+					batch.draw(text, 0, 0);//background
+					renderUnits();
+					batch.draw(text2, inter.selectionX, inter.selectionY);
 					renderPaths();
 					break;
 			}
-			font.draw(batch, "" + Gdx.graphics.getFramesPerSecond(), inter.selectionX, inter.selectionY);
-			font.draw(batch, "State: "+inter.getState(), inter.selectionX, inter.selectionY - selectionDim);
 
 
-			batch.setProjectionMatrix(camera.combined);
+
+			font.draw(batch, "FPS:" + Gdx.graphics.getFramesPerSecond(), minWid, screenLen);
+			font.draw(batch, "State: "+inter.getState(), minWid, screenLen - 25);
+			font.draw(batch, "Selection:: "+inter.selectionX+","+inter.selectionY, minWid, screenLen - 50);
+
+		updateCam();
+
+
+		batch.setProjectionMatrix(camera.combined);
 			//batch.draw(img, 0, 0);
 
 			batch.end();
 
 	}
+
+	public void renderMenu()
+	{
+
+
+	}
 	public void renderPaths()
 	{
 		ArrayList<Path> paths = inter.getPathfinder().getPaths();
-		System.out.println(paths.size()+" THE SIZE IS");
 		for(int i=0;i<paths.size();i++)
 		{
 			batch.draw(text2,paths.get(i).getLastX()*selectionDim,paths.get(i).getLastY()*selectionDim);
 		}
 	}
+
+
 	public void renderUnits()
 	{
 		ArrayList<Unit> units = map.getUnits();

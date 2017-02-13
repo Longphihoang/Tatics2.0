@@ -64,32 +64,36 @@ public class Interface {
 
     public void update(){
         if(state==1) {
-            if (move.equals("down")) {
-                if (selectionY/selectionDim > 0) {
-                    selectionY = selectionY - transition;
-                }
-            }
-
-            if (move.equals("up")) {
-                if (selectionY/selectionDim < map.getLen() - 1) {
-                    selectionY = selectionY + transition;
-                }
-            }
-            if (move.equals("right")) {
-                if(selectionX/selectionDim<map.getWidth()-1) {
-                    selectionX += transition;
-                }
-
-            }
-            if (move.equals("left")) {
-                if(selectionX/selectionDim>0) {
-                    selectionX += -transition;
-                }
-            }
+         stateOneUpdate();
         }
         if(state==2)
         {
             stateTwoUpdate();
+        }
+    }
+    private void stateOneUpdate()
+    {
+        if (move.equals("down")) {
+            if (selectionY/selectionDim > 0) {
+                selectionY = selectionY - transition;
+            }
+        }
+
+        if (move.equals("up")) {
+            if (selectionY/selectionDim < map.getLen() - 1) {
+                selectionY = selectionY + transition;
+            }
+        }
+        if (move.equals("right")) {
+            if(selectionX/selectionDim<map.getWidth()-1) {
+                selectionX += transition;
+            }
+
+        }
+        if (move.equals("left")) {
+            if(selectionX/selectionDim>0) {
+                selectionX += -transition;
+            }
         }
     }
     private void stateTwoUpdate()
@@ -149,7 +153,6 @@ public class Interface {
         }
         if(s.equals("select"))
         {
-            System.out.println(selectionX+"   "+ selectionY);
                 if(map.getTiles()[convertPixtoIndex(selectionX)][convertPixtoIndex(selectionY)].getUnit()!=null)
              {
                 state = 2;
@@ -183,17 +186,13 @@ public class Interface {
             move="left";
         }
         if(s.equals("select")) {
-            System.out.println("MOVE THIS SHIT");
             ArrayList<Path> paths = pathfinder.startFind(tile.getUnit());
-            System.out.println(convertPixtoIndex(selectionX) + " " + pathfinder.orgX );
             if (convertPixtoIndex(selectionX) == pathfinder.orgX && convertPixtoIndex(selectionY) == pathfinder.orgY) {
 
             }
             else {
                 for (int i = 0; i < paths.size(); i++) {
-                    System.out.print(paths.get(i).getLastX() + " " + paths.get(i).getLastY());
                     if (convertPixtoIndex(selectionX) == paths.get(i).getLastX() && convertPixtoIndex(selectionY) == paths.get(i).getLastY()) {
-                        System.out.print("moving");
                         selection1.move(map.getTile(convertPixtoIndex(selectionX), convertPixtoIndex(selectionY)));
                         state = 1;
                     }

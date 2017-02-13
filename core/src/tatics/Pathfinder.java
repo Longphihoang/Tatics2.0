@@ -20,7 +20,6 @@ public class Pathfinder {
     public ArrayList<Path>  startFind(Unit u)
     {
         paths = new ArrayList<Path>();
-        System.out.println();
         orgX=u.getX();
         orgY=u.getY();
         findPath(u.getX(),u.getY(),u.getMove(), new Path());
@@ -42,7 +41,6 @@ public class Pathfinder {
                     p2= new Path(p);//makes copy of path.
                     p2.add(pt);//adds point to new path
                     paths.add(p2);//adds path to list of paths
-                    //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
                     findPath(x, y-1, (move - tiles[x][y-1].movement),p2);
                 }
             }
@@ -52,7 +50,6 @@ public class Pathfinder {
                         p2= new Path(p);//makes copy of path.
                         p2.add(pt);//adds point to new path
                         paths.add(p2);//adds path to list of paths
-                        //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
                         findPath(x - 1, y, (move - tiles[x-1][y].movement),p2);
                     }
                 }
@@ -62,7 +59,6 @@ public class Pathfinder {
                     p2= new Path(p);//makes copy of path.
                     p2.add(pt);//adds point to new path
                     paths.add(p2);//adds path to list of paths
-                    //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
                     findPath(x + 1, y, (move - tiles[x+1][y].movement),p2);
                 }
 
@@ -72,7 +68,6 @@ public class Pathfinder {
                         p2= new Path(p);//makes copy of path.
                         p2.add(pt);//adds point to new path
                         paths.add(p2);//adds path to list of paths
-                        //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
                         findPath(x, y+1, (move - tiles[x][y+1].movement),p2);
                     }
                 }

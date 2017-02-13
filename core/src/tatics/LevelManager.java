@@ -32,7 +32,6 @@ public class LevelManager {
                 switch(line.charAt(j))
                 {
                     case 's': tiles.add(new SandTile(j,i-2),j,i-2); //-2 because file map starts at 2;
-                        System.out.println(line);
                         break;
                 }
             }
