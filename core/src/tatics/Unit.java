@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Unit {
     public int hp, attack, defense, resist,level, speed,move;
     public static int capicity=5;
+    private Tile tile;
     private String name;
     public int x;
     public int y;
@@ -24,7 +25,12 @@ public class Unit {
     {
 
     }
-
+    public void move(Tile t){
+        tile =t;
+        t.setUnit(this);
+        x=t.getX();
+        y=t.getY();
+    }
     public void addItem(Item item)
     {
         if(inventory.size()>capicity) {

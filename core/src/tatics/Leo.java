@@ -9,6 +9,7 @@ public class Leo extends Unit
 
     public Leo()
     {
+        setName("Leo");
         hp=15;
         defense = 5;
         move = 4;

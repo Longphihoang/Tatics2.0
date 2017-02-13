@@ -10,6 +10,14 @@ public class SandTile extends Tile {
     {
         type = "sand";
         image = "sand.png";
+        movement = 2;
+    }
+    SandTile(int x, int y)
+    {
+        super(x, y);
+
+        type = "sand";
+        image = "sand.png";
         movement = -1;
     }
 }

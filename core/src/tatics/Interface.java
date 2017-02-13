@@ -1,5 +1,7 @@
 package tatics;
 
+import java.util.ArrayList;
+
 /**
  * Created by long on 2/8/2017.
  */
@@ -8,14 +10,18 @@ States: 1= map state 0= menu
 
  */
 public class Interface {
+    private final int selectionDim =50;
+    final float transition=10;
     public float selectionX=0;
     public float selectionY=0;
     Account account;
-    Tile tile;
+    Tile tile,tileMove;
+    Unit selection1, selection2;
     Map map;
     LevelManager manager;
     int state=1;
     String move="";
+    Pathfinder pathfinder;
 
     public Interface()
     {
@@ -25,12 +31,15 @@ public class Interface {
 
     public void loadLevel(String s)
     {
+
         manager = new LevelManager((s));
         map = manager.getMap();
+        pathfinder = new Pathfinder(manager.getMap());
 
         if(s.equals("level1"))
         {
             account.addUnit(new Leo());
+            map.addUnit(new Leo(),2,2);
         }
         else if(s.equals("level2"))
         {
@@ -44,64 +53,194 @@ public class Interface {
         {
 
         }
+        map.addUnit(new Leo(),5,5);
     }
 
 
     public void update(){
         if(state==1) {
             if (move.equals("down")) {
-                if (selectionY != 0) {
-                    selectionY = selectionY - 5;
+                if (selectionY/selectionDim > 0) {
+                    selectionY = selectionY - transition;
                 }
             }
 
             if (move.equals("up")) {
-                if (selectionY != map.getLen() - 1) {
-                    selectionY = selectionY + 5;
+                if (selectionY/selectionDim < map.getLen() - 1) {
+                    selectionY = selectionY + transition;
                 }
             }
             if (move.equals("right")) {
-                if(selectionX!=map.getWidth()-1) {
-                    selectionX += 5;
+                if(selectionX/selectionDim<map.getWidth()-1) {
+                    selectionX += transition;
                 }
 
             }
             if (move.equals("left")) {
-                if(selectionX!=0) {
-                    selectionX += -5;
+                if(selectionX/selectionDim>0) {
+                    selectionX += -transition;
+                }
+            }
+        }
+        if(state==2)
+        {
+            stateTwoUpdate();
+        }
+    }
+    private void stateTwoUpdate()
+    {
+        if (move.equals("down")) {
+            if (selectionY/selectionDim > 0) {
+                selectionY = selectionY - transition;
+            }
+        }
+
+        if (move.equals("up")) {
+            if (selectionY/selectionDim < map.getLen() - 1) {
+                selectionY = selectionY + transition;
+            }
+        }
+        if (move.equals("right")) {
+            if(selectionX/selectionDim<map.getWidth()-1) {
+                selectionX += transition;
+            }
+
+        }
+        if (move.equals("left")) {
+            if(selectionX/selectionDim>0) {
+                selectionX += -transition;
+            }
+        }
+    }
+    public void input(String s) {
+        if(state==1) {
+            stateOneInput(s);
+        }
+        if(state ==2)
+        {
+            stateTwoInput(s);
+        }
+    }
+    public void stateOneInput(String s)
+    {
+        if(s.equals(""))
+        {
+            move="";
+            snapSelection();
+                 }
+        if (s.equals("down")) {
+            move="down";
+        }
+
+        if (s.equals("up")) {
+            move="up";
+        }
+        if (s.equals("right")) {
+            move="right";
+
+        }
+         if(s.equals("left")) {
+            move="left";
+        }
+        if(s.equals("select"))
+        {
+            System.out.println(selectionX+"   "+ selectionY);
+                if(map.getTiles()[convertPixtoIndex(selectionX)][convertPixtoIndex(selectionY)].getUnit()!=null)
+             {
+                state = 2;
+                tile = map.getTiles()[convertPixtoIndex(selectionX)][convertPixtoIndex(selectionY)];
+            }
+        }
+    }
+
+    public void stateTwoInput(String s)
+    {
+        int movement;
+        selection1=tile.getUnit();
+        movement = selection1.getMove();
+        if(s.equals(""))
+        {
+            move="";
+            snapSelection();
+        }
+        if (s.equals("down")&&convertPixtoIndex(selectionY)>selection1.getY()-movement) {
+            move="down";
+        }
+
+        if (s.equals("up")&&convertPixtoIndex(selectionY)<selection1.getY()+movement) {
+            move="up";
+        }
+        if (s.equals("right")&&convertPixtoIndex(selectionY)<selection1.getX()+movement) {
+            move="right";
+
+        }
+        if (s.equals("left")&&convertPixtoIndex(selectionY)>selection1.getX()-movement) {
+            move="left";
+        }
+        if(s.equals("select"))
+        {
+            ArrayList<Path> paths = pathfinder.startFind(tile.getUnit());
+            for(int i=0;i<paths.size();i++)
+            {
+                System.out.print(paths.get(i).getLastX()+" "+paths.get(i).getLastY());
+                if(selectionX==paths.get(i).getLastX()&&selectionY==paths.get(i).getLastY())
+                {
+                    System.out.print("moving");
+                    selection1.move(map.getTile((int)selectionX,(int)selectionY));
+                    state=3;
                 }
             }
         }
     }
 
-    public void input(String s) {
-        if(state==1) {
-            if(s.equals(""))
-            {
-                move="";
-            }
-            if (s.equals("down")) {
-                move="down";
-            }
+public int convertPixtoIndex(float input)
+{
+    int index;
 
-            if (s.equals("up")) {
-               move="up";
-            }
-            if (s.equals("right")) {
-                move="right";
+    index = (int)input;
+    index=index/selectionDim;
+    return index;
+}
+    public void snapSelection(){
 
-            }
-            if (s.equals("left")) {
-              move="left";
-            }
+        selectionX=convertPixtoIndex(selectionX)*selectionDim;
+        selectionY=convertPixtoIndex(selectionY)*selectionDim;
+/*
+        if(selectionX%50<25)
+        {
+            selectionX= selectionX+25-((selectionX+25)%50);
         }
+        else
+        {
+            selectionX= selectionX-25-((selectionX-25)%50);
+        }
+*/
     }
-
-
  public int getState()
  {
      return state;
  }
 
+    public void moveUnit(int x, int y)
+    {
+        selectionX=convertPixtoIndex(selectionX)*selectionDim;
+        selectionY=convertPixtoIndex(selectionY)*selectionDim;
+
+        //solve this snap selection to the nearest +50 position
+        /*
+        Unit unit= map.getTiles()[x][y].getUnit();
+        state = 2; //move state;
+        if(unit!=null)
+        {
+
+        }
+        */
+
+    }
+    public Map getMap()
+    {
+        return map;
+    }
 
 }
+

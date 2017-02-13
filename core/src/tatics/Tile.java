@@ -5,23 +5,37 @@ package tatics;
  */
 
 public class Tile {
+    int x;
+    int y;
     String image="";
     String type="";
     Unit unit=null;
-    int movement = 0;
+    int movement = 1;
     public Tile()
     {
 
     }
 
-
+    public Tile(int x, int y)
+    {
+        this.x = x;
+        this.y=y;
+    }
     public Tile(String type)
     {
         this.type=type;
 
     }
 
+    public int getX()
+    {
+        return x;
+    }
 
+    public int getY()
+    {
+        return y;
+    }
 
     public String getImage() {
         return image;
