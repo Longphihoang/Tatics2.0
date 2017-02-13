@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Pathfinder {
     private ArrayList<Path> paths;
+    public int orgX, orgY;
     Tile tiles[][];
     public Pathfinder(Map map)
     {
@@ -20,6 +21,8 @@ public class Pathfinder {
     {
         paths = new ArrayList<Path>();
         System.out.println();
+        orgX=u.getX();
+        orgY=u.getY();
         findPath(u.getX(),u.getY(),u.getMove(), new Path());
         return paths;
     }
@@ -28,22 +31,67 @@ public class Pathfinder {
     {
         Path p2;
         Point pt;
+
+
         if(move>0)
         {
-                if (x - 1 > 0|| (x-1!=p.getLastX()&&y!=p.getLastY())) {
+
+            if (y - 1 > -1 ) {
+                if(move-tiles[x][y-1].movement>0) {
+                    pt= new Point(x,y-1);//makes new point
+                    p2= new Path(p);//makes copy of path.
+                    p2.add(pt);//adds point to new path
+                    paths.add(p2);//adds path to list of paths
+                    //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
+                    findPath(x, y-1, (move - tiles[x][y-1].movement),p2);
+                }
+            }
+                if (x - 1 > -1 ) {
                     if(move-tiles[x-1][y].movement>0) {
                         pt= new Point(x-1,y);//makes new point
                         p2= new Path(p);//makes copy of path.
                         p2.add(pt);//adds point to new path
                         paths.add(p2);//adds path to list of paths
-                        System.out.println("AAAAA"+x+","+y);
-                        findPath(x - 1, y, move - tiles[x-1][y].movement,p2);
+                        //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
+                        findPath(x - 1, y, (move - tiles[x-1][y].movement),p2);
                     }
                 }
+            if (x +1<tiles.length ) {
+                if(move-tiles[x+1][y].movement>0) {
+                    pt= new Point(x+1,y);//makes new point
+                    p2= new Path(p);//makes copy of path.
+                    p2.add(pt);//adds point to new path
+                    paths.add(p2);//adds path to list of paths
+                    //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
+                    findPath(x + 1, y, (move - tiles[x+1][y].movement),p2);
+                }
+
+                if (y+1<tiles[0].length ) {
+                    if(move-tiles[x][y+1].movement>0) {
+                        pt= new Point(x,y+1);//makes new point
+                        p2= new Path(p);//makes copy of path.
+                        p2.add(pt);//adds point to new path
+                        paths.add(p2);//adds path to list of paths
+                        //System.out.println("AAAAA"+x+","+y+",tiles subtract "+(move-tiles[x-1][y].movement));
+                        findPath(x, y+1, (move - tiles[x][y+1].movement),p2);
+                    }
+                }
+            }
 
         }
     }
 
-
+    public String getPoints()
+    {
+        String s="";
+        for(int i=0; i<paths.size();i++)
+        {
+            s=s+"X"+paths.get(i).getLastX()+"Y"+paths.get(i).getLastY()+"X";
+        }
+            return s;
+    }
+    public ArrayList<Path> getPaths(){
+        return paths;
+    }
 
 }

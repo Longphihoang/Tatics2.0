@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import tatics.Interface;
 import tatics.LevelManager;
+import tatics.Path;
 import tatics.Unit;
 
 public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
@@ -34,7 +35,6 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 	BitmapFont font;
 	final float transition=10;
 	static TextureManager textureManager=new TextureManager();
-	private LevelManager manage;
 	private Texture text, text2;
 	public void create () {
 		font = new BitmapFont();
@@ -57,17 +57,22 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
 			//camera.position.set(Gdx.graphics.getWidth()/2+inter.selectionX,Gdx.graphics.getHeight()/2+inter.selectionY,0);
 			map = inter.getMap();
-			Gdx.gl.glClearColor(0, 0, 0, 0);
+			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			int len = 0;
-
+			batch.enableBlending();
 			batch.begin();
 			inter.update();
 			updateCam();
 
-			batch.draw(text, 0, 0);
+			batch.draw(text, 0, 0);//background
 			batch.draw(text2, inter.selectionX, inter.selectionY);
 			renderUnits();
+			switch(inter.getState()){
+				case 2:
+					renderPaths();
+					break;
+			}
 			font.draw(batch, "" + Gdx.graphics.getFramesPerSecond(), inter.selectionX, inter.selectionY);
 			font.draw(batch, "State: "+inter.getState(), inter.selectionX, inter.selectionY - selectionDim);
 
@@ -78,7 +83,15 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 			batch.end();
 
 	}
-
+	public void renderPaths()
+	{
+		ArrayList<Path> paths = inter.getPathfinder().getPaths();
+		System.out.println(paths.size()+" THE SIZE IS");
+		for(int i=0;i<paths.size();i++)
+		{
+			batch.draw(text2,paths.get(i).getLastX()*selectionDim,paths.get(i).getLastY()*selectionDim);
+		}
+	}
 	public void renderUnits()
 	{
 		ArrayList<Unit> units = map.getUnits();

@@ -12,7 +12,7 @@ public class Leo extends Unit
         setName("Leo");
         hp=15;
         defense = 5;
-        move = 4;
+        move = 5;
         attack = 6;
     }
 

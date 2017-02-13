@@ -26,13 +26,17 @@ public class Path {
 
     public int getLastX()
     {
+
         return (int)points.get(points.size()-1).getX();
     }
 
     public int getLastY()
     {
+
         return (int)points.get(points.size()-1).getY();
     }
+
+
 
     public void findPath(Path[][] paths, Point prev)
     {

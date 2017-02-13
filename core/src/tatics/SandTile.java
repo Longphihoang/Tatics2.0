@@ -10,7 +10,7 @@ public class SandTile extends Tile {
     {
         type = "sand";
         image = "sand.png";
-        movement = 2;
+        movement = 1;
     }
     SandTile(int x, int y)
     {
@@ -18,6 +18,6 @@ public class SandTile extends Tile {
 
         type = "sand";
         image = "sand.png";
-        movement = -1;
+        movement = 1;
     }
 }

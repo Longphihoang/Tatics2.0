@@ -21,6 +21,11 @@ public class Interface {
     LevelManager manager;
     int state=1;
     String move="";
+
+    public Pathfinder getPathfinder() {
+        return pathfinder;
+    }
+
     Pathfinder pathfinder;
 
     public Interface()
@@ -163,31 +168,35 @@ public class Interface {
             move="";
             snapSelection();
         }
-        if (s.equals("down")&&convertPixtoIndex(selectionY)>selection1.getY()-movement) {
+        if (s.equals("down")) {
             move="down";
         }
 
-        if (s.equals("up")&&convertPixtoIndex(selectionY)<selection1.getY()+movement) {
+        if (s.equals("up")) {
             move="up";
         }
-        if (s.equals("right")&&convertPixtoIndex(selectionY)<selection1.getX()+movement) {
+        if (s.equals("right")) {
             move="right";
 
         }
-        if (s.equals("left")&&convertPixtoIndex(selectionY)>selection1.getX()-movement) {
+        if (s.equals("left")) {
             move="left";
         }
-        if(s.equals("select"))
-        {
+        if(s.equals("select")) {
+            System.out.println("MOVE THIS SHIT");
             ArrayList<Path> paths = pathfinder.startFind(tile.getUnit());
-            for(int i=0;i<paths.size();i++)
-            {
-                System.out.print(paths.get(i).getLastX()+" "+paths.get(i).getLastY());
-                if(selectionX==paths.get(i).getLastX()&&selectionY==paths.get(i).getLastY())
-                {
-                    System.out.print("moving");
-                    selection1.move(map.getTile((int)selectionX,(int)selectionY));
-                    state=3;
+            System.out.println(convertPixtoIndex(selectionX) + " " + pathfinder.orgX );
+            if (convertPixtoIndex(selectionX) == pathfinder.orgX && convertPixtoIndex(selectionY) == pathfinder.orgY) {
+
+            }
+            else {
+                for (int i = 0; i < paths.size(); i++) {
+                    System.out.print(paths.get(i).getLastX() + " " + paths.get(i).getLastY());
+                    if (convertPixtoIndex(selectionX) == paths.get(i).getLastX() && convertPixtoIndex(selectionY) == paths.get(i).getLastY()) {
+                        System.out.print("moving");
+                        selection1.move(map.getTile(convertPixtoIndex(selectionX), convertPixtoIndex(selectionY)));
+                        state = 1;
+                    }
                 }
             }
         }
