@@ -4,7 +4,7 @@ package tatics;
  * Created by long on 2/3/2017.
  */
 
-public class Tile {
+public abstract class Tile {
     int x;
     int y;
     String image="";
@@ -26,6 +26,8 @@ public class Tile {
         this.type=type;
 
     }
+
+    abstract public boolean canMove(Unit u);
 
     public int getX()
     {

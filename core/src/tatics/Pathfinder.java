@@ -22,11 +22,11 @@ public class Pathfinder {
         paths = new ArrayList<Path>();
         orgX=u.getX();
         orgY=u.getY();
-        findPath(u.getX(),u.getY(),u.getMove(), new Path());
+        findPath(u.getX(),u.getY(),u.getMove(), new Path(), u);
         return paths;
     }
 
-    private void findPath(int x, int y, int move, Path p)
+    private void findPath(int x, int y, int move, Path p, Unit u)
     {
         Path p2;
         Point pt;
@@ -36,39 +36,39 @@ public class Pathfinder {
         {
 
             if (y - 1 > -1 ) {
-                if(move-tiles[x][y-1].movement>0) {
+                if(move-tiles[x][y-1].movement>0&& tiles[x][y-1].canMove(u)) {
                     pt= new Point(x,y-1);//makes new point
                     p2= new Path(p);//makes copy of path.
                     p2.add(pt);//adds point to new path
                     paths.add(p2);//adds path to list of paths
-                    findPath(x, y-1, (move - tiles[x][y-1].movement),p2);
+                    findPath(x, y-1, (move - tiles[x][y-1].movement),p2,u);
                 }
             }
                 if (x - 1 > -1 ) {
-                    if(move-tiles[x-1][y].movement>0) {
+                    if(move-tiles[x-1][y].movement>0&& tiles[x-1][y].canMove(u)) {
                         pt= new Point(x-1,y);//makes new point
                         p2= new Path(p);//makes copy of path.
                         p2.add(pt);//adds point to new path
                         paths.add(p2);//adds path to list of paths
-                        findPath(x - 1, y, (move - tiles[x-1][y].movement),p2);
+                        findPath(x - 1, y, (move - tiles[x-1][y].movement),p2,u);
                     }
                 }
             if (x +1<tiles.length ) {
-                if(move-tiles[x+1][y].movement>0) {
+                if(move-tiles[x+1][y].movement>0&& tiles[x+1][y].canMove(u)) {
                     pt= new Point(x+1,y);//makes new point
                     p2= new Path(p);//makes copy of path.
                     p2.add(pt);//adds point to new path
                     paths.add(p2);//adds path to list of paths
-                    findPath(x + 1, y, (move - tiles[x+1][y].movement),p2);
+                    findPath(x + 1, y, (move - tiles[x+1][y].movement),p2,u);
                 }
 
                 if (y+1<tiles[0].length ) {
-                    if(move-tiles[x][y+1].movement>0) {
+                    if(move-tiles[x][y+1].movement>0&& tiles[x][y+1].canMove(u)) {
                         pt= new Point(x,y+1);//makes new point
                         p2= new Path(p);//makes copy of path.
                         p2.add(pt);//adds point to new path
                         paths.add(p2);//adds path to list of paths
-                        findPath(x, y+1, (move - tiles[x][y+1].movement),p2);
+                        findPath(x, y+1, (move - tiles[x][y+1].movement),p2,u);
                     }
                 }
             }

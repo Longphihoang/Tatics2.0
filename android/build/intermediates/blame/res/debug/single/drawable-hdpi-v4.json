@@ -4,6 +4,10 @@
         "source": "C:\\Users\\long\\Desktop\\Tatics\\android\\res\\drawable-hdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\long\\Desktop\\Tatics2.0\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\long\\Desktop\\Tatics2.0\\android\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
         "merged": "D:\\Users\\Long\\Tatics2.0\\android\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
         "source": "D:\\Users\\Long\\Tatics2.0\\android\\res\\drawable-hdpi\\ic_launcher.png"
     }

@@ -33,7 +33,9 @@ public class LevelManager {
                 {
                     case 's': tiles.add(new SandTile(j,i-2),j,i-2); //-2 because file map starts at 2;
                         break;
+                    case 'l': tiles.add (new LavaTile(j,i-2),j,i-2); //lava tile -2 because filemap.txt starts at line 2
                 }
+                System.out.println(line.charAt(j));
             }
         }
     }

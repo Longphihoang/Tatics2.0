@@ -20,4 +20,10 @@ public class SandTile extends Tile {
         image = "sand.png";
         movement = 1;
     }
+
+    // types of units can cross sand tiles
+    public boolean canMove(Unit u)
+    {
+        return true;
+    }
 }

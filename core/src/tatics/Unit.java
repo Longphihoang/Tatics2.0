@@ -13,6 +13,8 @@ public class Unit {
     private String name;
     public int x;
     public int y;
+    public boolean fly=false;
+    private int team = 0; //0 is your team
     public Item weapon;
     public Item armor;
     private ArrayList<Item> inventory;
@@ -60,6 +62,16 @@ public class Unit {
                 inventory.remove(i);
             }
         }
+    }
+
+    public int getTeam()
+    {
+        return team;
+    }
+
+    public void setTeam(int a)
+    {
+        team =a;
     }
 
 

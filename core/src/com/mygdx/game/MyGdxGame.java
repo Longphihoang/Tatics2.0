@@ -22,9 +22,8 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 	SpriteBatch batch;
 	TextureManager textures;
 	Interface inter;
-	Interface i;
 	tatics.Map map;
-
+	int count=0; // counter of render time
 	private final int selectionDim =50;
 	private static final float MIN_FRAME_LENGTH = 1f/60f;
 	private float timeSinceLastRender;
@@ -79,11 +78,14 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 					renderUnits();
 					batch.draw(text2, inter.selectionX, inter.selectionY);
 					break;
-				case 2:
+				case 2://paths drawing
+					batch.setColor(Color.DARK_GRAY);
 					batch.draw(text, 0, 0);//background
+					batch.setColor(Color.WHITE);
+					renderPaths();
 					renderUnits();
 					batch.draw(text2, inter.selectionX, inter.selectionY);
-					renderPaths();
+
 					break;
 			}
 
@@ -113,7 +115,11 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 		ArrayList<Path> paths = inter.getPathfinder().getPaths();
 		for(int i=0;i<paths.size();i++)
 		{
+			batch.setColor(Color.FOREST);
 			batch.draw(text2,paths.get(i).getLastX()*selectionDim,paths.get(i).getLastY()*selectionDim);
+			batch.setColor(Color.WHITE);
+
+
 		}
 	}
 
