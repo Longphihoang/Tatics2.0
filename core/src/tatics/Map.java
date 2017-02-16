@@ -12,6 +12,9 @@ public class Map {
     private String name;
     private ArrayList<Unit> units;
 
+
+    public int level;
+
     Map(int x, int y, String s)
     {
         tiles = new Tile[x][y];
@@ -58,7 +61,14 @@ public class Map {
         return tiles[x][y];
     }
 
-    
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
 
 }

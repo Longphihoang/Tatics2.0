@@ -1,23 +1,28 @@
 package tatics;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 import java.util.ArrayList;
 
 /**
  * Created by long on 2/5/2017.
  */
 
-public class Unit {
+public abstract class Unit {
     public int hp, attack, defense, resist,level, speed,move;
     public static int capicity=5;
     private Tile tile;
     private String name;
     public int x;
     public int y;
-    public boolean fly=false;
+    public boolean fly=false,horse=false;
     private int team = 0; //0 is your team
     public Item weapon;
     public Item armor;
     private ArrayList<Item> inventory;
+
+    public abstract void render(Batch batch,float x, float y);
+
     public void interact(Unit unit)
     {
 
@@ -63,7 +68,6 @@ public class Unit {
             }
         }
     }
-
     public int getTeam()
     {
         return team;
@@ -185,5 +189,21 @@ public class Unit {
 
     public void setInventory(ArrayList<Item> inventory) {
         this.inventory = inventory;
+    }
+
+    public boolean isHorse() {
+        return horse;
+    }
+
+    public void setHorse(boolean horse) {
+        this.horse = horse;
+    }
+
+    public boolean isFly() {
+        return fly;
+    }
+
+    public void setFly(boolean fly) {
+        this.fly = fly;
     }
 }

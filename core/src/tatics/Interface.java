@@ -19,7 +19,7 @@ public class Interface {
     Unit selection1, selection2;
     Map map;
     LevelManager manager;
-    int state=1;
+    int state;
     String move="";
 
     public Pathfinder getPathfinder() {
@@ -28,9 +28,11 @@ public class Interface {
 
     Pathfinder pathfinder;
 
+
     public Interface()
     {
         Account.getAccount();
+        state = 0;
     }
 
 
@@ -41,10 +43,10 @@ public class Interface {
         map = manager.getMap();
         pathfinder = new Pathfinder(manager.getMap());
 
-        if(s.equals("level1"))
+        if(s.equals("levels\\l1.txt"))
         {
-            account.addUnit(new Leo());
-            map.addUnit(new Leo(),2,2);
+            //account.addUnit(new Leo());
+            map.addUnit(new Leo(),7,18);
         }
         else if(s.equals("level2"))
         {
@@ -58,7 +60,6 @@ public class Interface {
         {
 
         }
-        map.addUnit(new Leo(),5,5);
     }
 
 
@@ -250,5 +251,8 @@ public int convertPixtoIndex(float input)
         return map;
     }
 
+    public void setState(int state) {
+        this.state = state;
+    }
 }
 

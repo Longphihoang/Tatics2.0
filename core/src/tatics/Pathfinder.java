@@ -53,6 +53,10 @@ public class Pathfinder {
                         findPath(x - 1, y, (move - tiles[x-1][y].movement),p2,u);
                     }
                 }
+
+
+            System.out.println((tiles[x+1][y].canMove(u)));
+
             if (x +1<tiles.length ) {
                 if(move-tiles[x+1][y].movement>0&& tiles[x+1][y].canMove(u)) {
                     pt= new Point(x+1,y);//makes new point

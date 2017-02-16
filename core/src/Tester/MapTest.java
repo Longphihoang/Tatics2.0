@@ -8,7 +8,7 @@ public class MapTest {
 
 
         public static void main (String[] arg) {
-            MapMaker map = new MapMaker(29,20,"LevelMade.txt");
+            MapMaker map = new MapMaker(25,20,"level1.txt");
         }
 
 

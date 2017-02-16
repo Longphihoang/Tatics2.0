@@ -31,15 +31,29 @@ public class LevelManager {
             {
                 switch(line.charAt(j))
                 {
+                    case 'p': tiles.add(new PlainTile(j,i-2),j,i-2);
+                        break;
+                    case 'w': tiles.add(new LakeTile(j,i-2),j,i-2);
+                        break;
                     case 's': tiles.add(new SandTile(j,i-2),j,i-2); //-2 because file map starts at 2;
                         break;
-                    case 'l': tiles.add (new LavaTile(j,i-2),j,i-2); //lava tile -2 because filemap.txt starts at line 2
+                    case 'l': tiles.add (new LavaTile(j,i-2),j,i-2);
+                        break;//lava tile -2 because filemap.txt starts at line 2
                 }
-                System.out.println(line.charAt(j));
             }
         }
     }
+    public void addUnit(String fileName)
+    {
+        if(fileName.equals("levels\\l1.txt"))
+        {
+            tiles.addUnit(new Leo(),8,4);
+            tiles.setLevel(1);
 
+        }
+
+
+    }
     public int getWidth()
     {
         return tiles.getWidth();

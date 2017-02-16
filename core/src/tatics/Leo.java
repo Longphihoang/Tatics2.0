@@ -1,19 +1,26 @@
 package tatics;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 /**
  * Created by long on 2/8/2017.
  */
 
 public class Leo extends Unit
 {
-
+    Texture texture;
+    int count=0;
+    int spriteSize; //50x50 || 100x100|| 200x|200
     public Leo()
     {
         setName("Leo");
         hp=15;
         defense = 5;
-        move = 5;
+        move = 4;
         attack = 6;
+        texture=new Texture("sprites\\vikingSprite50.png");
+        spriteSize=50;
     }
 
     public void interact(Unit unit,String level)
@@ -24,4 +31,11 @@ public class Leo extends Unit
         }
     }
 
+    @Override
+    public void render(Batch batch,float x, float y) {
+        count+=spriteSize;
+        count = count %texture.getWidth();
+     batch.draw(texture,x,y);
+        System.out.println("HELLO");
+    }
 }

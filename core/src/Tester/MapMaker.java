@@ -18,7 +18,14 @@ public class MapMaker {
             {
                 for(int j=0;j<x;j++)
                 {
-                    writer.print("s");
+
+                    if(j<5||j>10||i>10)
+                    {
+                        writer.print("w");
+                    }
+                    else {
+                        writer.print("p");
+                    }
                 }
                 writer.println();
             }

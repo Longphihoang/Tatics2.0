@@ -41,6 +41,7 @@
     <orderEntry type="library" exported="" name="gdx-controllers-gwt-1.9.5-sources" level="project" />
     <orderEntry type="library" exported="" name="gdx-ai-1.8.0-sources" level="project" />
     <orderEntry type="library" exported="" name="gdx-ai-1.8.0" level="project" />
+    <orderEntry type="library" exported="" name="gdx-freetype-1.9.5" level="project" />
     <orderEntry type="library" exported="" name="gwt-user-2.8.0" level="project" />
     <orderEntry type="library" exported="" name="jsinterop-annotations-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="jsinterop-annotations-1.0.1-sources" level="project" />
