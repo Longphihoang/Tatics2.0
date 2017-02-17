@@ -2,6 +2,9 @@ package tatics;
 
 import java.util.ArrayList;
 
+import tatics.TaticsUnits.Leo;
+import tatics.TaticsUnits.Unit;
+
 /**
  * Created by long on 2/8/2017.
  */
@@ -257,6 +260,12 @@ public int convertPixtoIndex(float input)
 
     public Tile getTile() {
         return tile;
+    }
+
+    public void calculateAttack(Unit a, Unit b)
+    {
+
+
     }
 }
 

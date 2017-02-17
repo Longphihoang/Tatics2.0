@@ -1,5 +1,7 @@
 package tatics;
 
+import tatics.TaticsUnits.Unit;
+
 /**
  * Created by long on 2/7/2017.
  */

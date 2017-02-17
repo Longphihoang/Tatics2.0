@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Path {
+    private int count = 0;
     private ArrayList<Point> points;
 
     public Path()
@@ -17,6 +18,8 @@ public class Path {
     public Path(Path p)
     {
         points = new ArrayList<Point>(p.points);
+        count = p.count;
+        count++;
     }
 
     public void add(Point p)

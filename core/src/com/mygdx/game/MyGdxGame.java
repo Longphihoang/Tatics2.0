@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,10 +13,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 import tatics.Interface;
-import tatics.Leo;
-import tatics.LevelManager;
 import tatics.Path;
-import tatics.Unit;
+import tatics.TaticsUnits.Unit;
 
 public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
