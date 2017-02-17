@@ -52,7 +52,7 @@ public class StartScreen extends Sprite {
         //shadow.draw(batch,"Tatics",-x/5,y/3);
         if(state==1) {
             font50.setColor(Color.WHITE);
-            font100.draw(batch, "Tatics", x / 4, y - y / 5);
+            font100.draw(batch, "Tactix", x / 4, y - y / 5);
 
             System.out.println(y);
             if(selection ==0)

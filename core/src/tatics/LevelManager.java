@@ -42,6 +42,7 @@ public class LevelManager {
                 }
             }
         }
+        printMap();
     }
     public void addUnit(String fileName)
     {
@@ -52,6 +53,19 @@ public class LevelManager {
 
         }
 
+
+    }
+
+    public void printMap()
+    {
+        for(int i=0;i<getLen();i++)
+        {
+            for(int j=0;j<getWidth();j++)
+            {
+                System.out.print(getMap().getTile(j,i).type+" "+ j + " "+ i+ "|" );
+            }
+            System.out.println();
+        }
 
     }
     public int getWidth()

@@ -20,11 +20,12 @@ import tatics.Path;
 import tatics.Unit;
 
 public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
+
 	SpriteBatch batch;
 	TextureManager textures;
 	Interface inter;
 	tatics.Map map;
-	private final int selectionDim =50;
+	private final int selectionDim =100;
 	private OrthographicCamera camera;
 	 float screenWid=0;
 	float screenLen=0;
@@ -34,14 +35,17 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 	final float transition=10;
 	StartScreen start;
 	static TextureManager textureManager=new TextureManager();
+	public Options options;
 	private Texture text, text2;
 	public void create () {
 		font = new BitmapFont();
+
 		screenWid=Gdx.graphics.getWidth();
 		screenLen=Gdx.graphics.getHeight();
 		inter = new Interface();
 		batch = new SpriteBatch();
 		start = new StartScreen(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),batch,inter);
+		options = new Options();
 		//img = new Texture("badlogic.jpg");
 		textures = new TextureManager();
 		Gdx.input.setInputProcessor(this);
@@ -57,8 +61,8 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
 			//camera.position.set(Gdx.graphics.getWidth()/2+inter.selectionX,Gdx.graphics.getHeight()/2+inter.selectionY,0);
 			map = inter.getMap();
-			Gdx.gl.glClearColor(0,0,0,1);
-			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			int len = 0;
 			batch.enableBlending();
 			batch.begin();
@@ -79,12 +83,18 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 					break;
 				case 2://paths drawing
 					batch.setColor(Color.DARK_GRAY);
-					//batch.draw(text, 0, 0);//background
+					batch.draw(text, 0, 0);//background
 					batch.setColor(Color.WHITE);
 					renderPaths();
-					//renderUnits();
+					renderUnits();
 					batch.draw(text2, inter.selectionX, inter.selectionY);
 					updateCam();
+					break;
+				case 3:
+					batch.draw(text,0,0);//background
+					renderUnits();
+					renderOptions();
+					options.render(batch,minWid,minLen,selectionDim,inter.getTile().getUnit());
 					break;
 			}
 
@@ -120,6 +130,12 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
 
 		}
+	}
+
+	public void renderOptions()
+	{
+
+
 	}
 
 
@@ -217,6 +233,24 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 				}
 				if (keycode == Input.Keys.A) {
 
+				}
+			case 3:
+				if(keycode == Input.Keys.DOWN){
+					options.input("down");
+					break;
+				}
+				if(keycode == Input.Keys.UP)
+				{
+					options.input("up");
+					break;
+				}
+				if(keycode==Input.Keys.A)
+				{
+					options.input("select");
+					if(options.getSelection()==0)
+					{
+						inter.setState(2);
+					}
 				}
         }
 		return false;

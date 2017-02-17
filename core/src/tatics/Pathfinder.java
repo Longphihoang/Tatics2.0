@@ -55,7 +55,7 @@ public class Pathfinder {
                 }
 
 
-            System.out.println((tiles[x+1][y].canMove(u)));
+            System.out.println((tiles[x+1][y].canMove(u)) + tiles[x+1][y].type);
 
             if (x +1<tiles.length ) {
                 if(move-tiles[x+1][y].movement>0&& tiles[x+1][y].canMove(u)) {

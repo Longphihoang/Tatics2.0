@@ -15,7 +15,10 @@ public abstract class Unit {
     private String name;
     public int x;
     public int y;
-    public boolean fly=false,horse=false;
+    public boolean fly=false;
+    public boolean horse=false;
+    public boolean attacked;
+    public boolean moved;
     private int team = 0; //0 is your team
     public Item weapon;
     public Item armor;
@@ -205,5 +208,20 @@ public abstract class Unit {
 
     public void setFly(boolean fly) {
         this.fly = fly;
+    }
+    public boolean isAttacked() {
+        return attacked;
+    }
+
+    public void setAttacked(boolean attacked) {
+        this.attacked = attacked;
+    }
+
+    public boolean isMoved() {
+        return moved;
+    }
+
+    public void setMoved(boolean moved) {
+        this.moved = moved;
     }
 }

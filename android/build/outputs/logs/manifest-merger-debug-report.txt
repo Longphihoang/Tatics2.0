@@ -38,7 +38,7 @@ ADDED from C:\Users\long\Desktop\Tatics2.0\android\AndroidManifest.xml:9:5-24:19
 activity#com.mygdx.game.AndroidLauncher
 ADDED from C:\Users\long\Desktop\Tatics2.0\android\AndroidManifest.xml:14:9-23:20
 	android:screenOrientation
-		ADDED from C:\Users\long\Desktop\Tatics2.0\android\AndroidManifest.xml:17:13-50
+		ADDED from C:\Users\long\Desktop\Tatics2.0\android\AndroidManifest.xml:17:13-49
 	android:label
 		ADDED from C:\Users\long\Desktop\Tatics2.0\android\AndroidManifest.xml:16:13-45
 	android:configChanges

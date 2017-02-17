@@ -10,7 +10,7 @@ States: 1= map state 0= menu
 
  */
 public class Interface {
-    private final int selectionDim =50;
+    private final int selectionDim =100;
     final float transition=10;
     public float selectionX=0;
     public float selectionY=0;
@@ -46,7 +46,7 @@ public class Interface {
         if(s.equals("levels\\l1.txt"))
         {
             //account.addUnit(new Leo());
-            map.addUnit(new Leo(),7,18);
+            map.addUnit(new Leo(),7,0);
         }
         else if(s.equals("level2"))
         {
@@ -156,7 +156,7 @@ public class Interface {
         {
                 if(map.getTiles()[convertPixtoIndex(selectionX)][convertPixtoIndex(selectionY)].getUnit()!=null)
              {
-                state = 2;
+                state = 3;
                 tile = map.getTiles()[convertPixtoIndex(selectionX)][convertPixtoIndex(selectionY)];
             }
         }
@@ -253,6 +253,10 @@ public int convertPixtoIndex(float input)
 
     public void setState(int state) {
         this.state = state;
+    }
+
+    public Tile getTile() {
+        return tile;
     }
 }
 

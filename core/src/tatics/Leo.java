@@ -19,8 +19,8 @@ public class Leo extends Unit
         defense = 5;
         move = 4;
         attack = 6;
-        texture=new Texture("sprites\\vikingSprite50.png");
-        spriteSize=50;
+        texture=new Texture("sprites\\vikingsprite100.png");
+        spriteSize=100;
     }
 
     public void interact(Unit unit,String level)
@@ -33,9 +33,10 @@ public class Leo extends Unit
 
     @Override
     public void render(Batch batch,float x, float y) {
+        batch.enableBlending();
+
         count+=spriteSize;
         count = count %texture.getWidth();
-     batch.draw(texture,x,y);
-        System.out.println("HELLO");
+     batch.draw(texture,x,y,count,0,spriteSize,spriteSize);
     }
 }
